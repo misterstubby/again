@@ -28,10 +28,8 @@ title = fontTitle.render("MISSION ABYSS", True, WHITE)
 spaceship_size = (400, 300)
 spaceship = pygame.image.load("spaceship.png").convert_alpha()
 spaceship = pygame.transform.scale(spaceship, spaceship_size)
-dustcloud_size = (400, 300)
-dustcloud = pygame.image.load("dustcloud.png").convert_alpha()
-dustcloud = pygame.transform.scale(dustcloud, dustcloud_size)
-bg_size = (840,3360)
+
+bg_size = (840,360)
 background = pygame.image.load("AGAIN.png").convert_alpha()
 background = pygame.transform.scale(background,bg_size)
 background_rect = background.get_rect()
@@ -133,45 +131,50 @@ while not done:
   #flying into sky pt2 (at middle, moving background)
   done = False
   c = 0
+  mixer.music.load("Hans Zimmer - Cornfield Chase.mp3")
   while not done:
     clock.tick(60)
+    if c == 0:
+      mixer.music.play()
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         done = True
     screen.fill(PERIWINKLE)
-    screen.blit(background,[0,rectBack.y - c])
-    print("working")
+    screen.blit(background,[0,-360 +c])
+
     screen.blit(spaceship, [220, 30])  
-    c+=100
-    if c >= 3360:
+    c+=0.5
+    if c >= 360:
       done = True
     pygame.display.flip()
   #flying into sky pt3(pasts the end, preparing for title scene)
   done = False
   a = 0
+  x = 0
   while not done:
     clock.tick(60)
-
+    
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         done = True
     screen.fill(DARK_BLUE)
-    screen.blit(spaceship, [220, 330 + a])  #moving the spaceship up 1 at a time
-    a += 1
+    screen.blit(background,[0,0+x])
+    screen.blit(spaceship,[220,30+a]) 
+    
+    a += 0.5
+    x += 1
     if a >= 330:
       done = True
     pygame.display.flip()
   #title
-  mixer.music.load("Hans Zimmer - Cornfield Chase.mp3")
+  
   done = False
   count = 0
-  x = 0
+  a = 0
   while not done:
     clock.tick(60)
-    if x == 0:
-      mixer.music.play()
-      print("playing")
+    
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         done = True
@@ -179,7 +182,26 @@ while not done:
     title_rect = title.get_rect(center=screen.get_rect().center)
     screen.blit(title,title_rect)
     a += 1
-    if a >= 1000:
+    if a >= 500:
       done = True
-    pygame.display.flip()  
+    pygame.display.flip() 
+    
+  #out of earth
+  done = False
+  count = 0
+  a = 0
+  while not done:
+    clock.tick(60)
+    
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        done = True
+    screen.fill(DARK_BLUE)
+    title_rect = title.get_rect(center=screen.get_rect().center)
+    screen.blit(title,title_rect)
+    a += 1
+    if a >= 500:
+      done = True
+    pygame.display.flip() 
+   
 pygame.quit()
