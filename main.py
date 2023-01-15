@@ -28,7 +28,7 @@ title = fontTitle.render("MISSION ABYSS", True, WHITE)
 spaceship_size = (400, 300)
 spaceship = pygame.image.load("spaceship.png").convert_alpha()
 spaceship = pygame.transform.scale(spaceship, spaceship_size)
-
+earth = pygame.image.load("earth.png").convert_alpha()
 bg_size = (840,360)
 background = pygame.image.load("AGAIN.png").convert_alpha()
 background = pygame.transform.scale(background,bg_size)
@@ -161,7 +161,7 @@ while not done:
     screen.fill(DARK_BLUE)
     screen.blit(background,[0,0+x])
     screen.blit(spaceship,[220,30+a]) 
-    
+    screen.blit(title,[130, -330+a])
     a += 0.5
     x += 1
     if a >= 330:
@@ -179,14 +179,29 @@ while not done:
       if event.type == pygame.QUIT:
         done = True
     screen.fill(DARK_BLUE)
-    title_rect = title.get_rect(center=screen.get_rect().center)
-    screen.blit(title,title_rect)
+    
+    screen.blit(title,[130,0+a])
+    a += 1
+    if a >= 130:
+      done = True
+    pygame.display.flip() 
+  done = False
+  a = 0
+  while not done:
+    clock.tick(60)
+    
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        done = True
+    screen.fill(DARK_BLUE)
+    
+    screen.blit(title,[130,130])
     a += 1
     if a >= 500:
       done = True
     pygame.display.flip() 
     
-  #out of earth
+  #move title down
   done = False
   count = 0
   a = 0
@@ -197,11 +212,46 @@ while not done:
       if event.type == pygame.QUIT:
         done = True
     screen.fill(DARK_BLUE)
-    title_rect = title.get_rect(center=screen.get_rect().center)
-    screen.blit(title,title_rect)
+    screen.blit(title,[130,130+a])
     a += 1
-    if a >= 500:
+    if a >= 300:
       done = True
     pygame.display.flip() 
-   
+  #out of earth scene
+  done = False
+  count = 0
+  a = 0
+  b = 0
+  while not done:
+    clock.tick(60)
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        done = True
+    screen.fill(DARK_BLUE)
+    screen.blit(earth,[-348+a,716 - b])
+    a += 1
+    b+= 2
+    if a >= 348:
+      done = True
+    pygame.display.flip() 
+  #rocket moves out of earth
+  done = False
+  count = 0
+  a = 0
+  b = 0
+  spaceship = pygame.transform.scale(spaceship,(100,75))
+  spaceship = pygame.transform.rotate(spaceship,270)
+  
+  while not done:
+    clock.tick(60)
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        done = True
+    screen.fill(DARK_BLUE)
+    screen.blit(spaceship,[0+a,133])
+    screen.blit(earth,[0,20])
+    a+=5
+    if a >= 840:
+      done = True
+    pygame.display.flip()   
 pygame.quit()
