@@ -17,7 +17,7 @@ RED = (255, 0, 0)
 PERIWINKLE = (142, 195, 244)
 YELLOW = (255, 195, 0)
 CYAN = (0, 255, 253)
-DARK_BLUE = (27, 25, 127)
+DARK_BLUE = (0,0,0)
 # surface
 size = [840, 360]
 screen = pygame.display.set_mode(size)
@@ -270,7 +270,7 @@ while not done:
         screen.fill(DARK_BLUE)
         screen.blit(stars, (i, 0))
         screen.blit(stars, (840+i, 0))
-        screen.blit(spaceship, spaceship_rect)
+        
         if i <= -840:
             screen.blit(stars, (840+i, 0))
             i = 0
@@ -278,6 +278,7 @@ while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+        screen.blit(spaceship, spaceship_rect)
         a += 1
         if a >= 1000:
             done = True
@@ -288,9 +289,10 @@ while not done:
     while not done:
         clock.tick(60)
         screen.fill(DARK_BLUE)
+        
         screen.blit(stars, (i, 0))
         screen.blit(stars, (840+i, 0))
-        screen.blit(spaceship, (spaceship_rect.x + a, spaceship_rect.y))
+        
         if i <= -840:
             screen.blit(stars, (840+i, 0))
             i = 0
@@ -298,6 +300,7 @@ while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+        screen.blit(spaceship, (spaceship_rect.x + a, spaceship_rect.y))
         a += 1
         if a >= 520:
             done = True
