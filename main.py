@@ -100,10 +100,14 @@ while not done:
 
 
 # rocket sets off
+    mixer.music.load("rocketlaunch.mp3")
+    c = 0
     done = False
     y = 0  # variable to move rocket up
     while not done:
         clock.tick(60)
+        if c == 0:
+            mixer.music.play()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -115,7 +119,7 @@ while not done:
         if y == 342:
             done = True
         pygame.display.flip()
-
+    mixer.music.unload()
     # flying into sky pt1 (reaches middle and bg move fast)
     done = False
     z = 0
