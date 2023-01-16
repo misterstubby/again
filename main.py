@@ -263,7 +263,7 @@ while not done:
     done = False
     i = 0
     a = 0
-    spaceship = pygame.transform.scale(spaceship,(300,400))
+    spaceship = pygame.transform.scale(spaceship, (300, 400))
     spaceship_rect = spaceship.get_rect(center=screen.get_rect().center)
     while not done:
         clock.tick(60)
@@ -282,4 +282,24 @@ while not done:
         if a >= 1000:
             done = True
         pygame.display.flip()
+    i = 0
+    a = 0
+    done = False
+    while not done:
+        clock.tick(60)
+        screen.fill(DARK_BLUE)
+        screen.blit(stars, (i, 0))
+        screen.blit(stars, (840+i, 0))
+        screen.blit(spaceship, (spaceship_rect.x + a, spaceship_rect.y))
+        if i <= -840:
+            screen.blit(stars, (840+i, 0))
+            i = 0
+        i = i - 50
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+        a += 1
+        if a >= 520:
+            done = True
+        pygame.display.flip()       
 pygame.quit()
