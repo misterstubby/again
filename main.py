@@ -308,5 +308,6 @@ while not done:
         a += 1
         if a >= 520:
             done = True
-        pygame.display.flip()       
+        pygame.display.flip()    
+        #scene where rocket flies into the black hole   
 pygame.quit()
