@@ -271,7 +271,7 @@ while not done:
         screen.blit(stars, (i, 0))
         screen.blit(stars, (840+i, 0))
         screen.blit(spaceship, spaceship_rect)
-        if i == -840:
+        if i <= -840:
             screen.blit(stars, (840+i, 0))
             i = 0
         i = i - 50
