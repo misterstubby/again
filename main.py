@@ -278,7 +278,6 @@ while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-        print("works")
         a += 1
         if a >= 1000:
             done = True
